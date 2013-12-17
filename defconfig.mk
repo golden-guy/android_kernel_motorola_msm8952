@@ -18,6 +18,7 @@ endif
 endif
 endif
 endif
+endif
 
 # append all additional configs
 ifneq ($(KERNEL_EXTRA_CONFIG),)
