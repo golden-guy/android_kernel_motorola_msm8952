@@ -2381,7 +2381,7 @@ static bool smbchg_is_parallel_usb_ok(struct smbchg_chip *chip)
 		SMB_DBG(chip, "JEITA active, skipping\n");
 		return false;
 	}
-
+#endif
 	if (get_prop_batt_voltage_now(chip) < PARALLEL_MIN_BATT_VOLT_UV) {
 		SMB_DBG(chip, "Battery Voltage below %d, skipping\n",
 		       PARALLEL_MIN_BATT_VOLT_UV);
