@@ -846,7 +846,7 @@ static bool is_otg_present_schg(struct smbchg_chip *chip)
 	return (reg & RID_MASK) == 0;
 }
 
-#define RID_CHANGE_DET			BIT(3)
+#define RID_GND_DET_STS			BIT(2)
 static bool is_otg_present_schg_lite(struct smbchg_chip *chip)
 {
 	int rc;
@@ -859,7 +859,7 @@ static bool is_otg_present_schg_lite(struct smbchg_chip *chip)
 		return false;
 	}
 
-	return !!(reg & RID_CHANGE_DET);
+	return !!(reg & RID_GND_DET_STS);
 }
 
 static bool is_otg_present(struct smbchg_chip *chip)
