@@ -2238,6 +2238,29 @@ static int smbchg_set_usb_chg_current(struct smbchg_chip *chip,
 	return rc;
 }
 
+static int smbchg_set_usb_chg_current(struct smbchg_chip *chip,
+							int current_ma)
+{
+	int i, rc;
+	u8 usb_cur_val;
+
+	for (i = ARRAY_SIZE(usb_current_table) - 1; i >= 0; i--) {
+		if (current_ma >= usb_current_table[i])
+			break;
+	}
+
+	/* Set minimum input limit if not found in the current table */
+	if (i < 0)
+		i = 0;
+
+	usb_cur_val = i & USBIN_INPUT_MASK;
+	rc = smbchg_sec_masked_write(chip, chip->usb_chgpth_base + IL_CFG,
+				USBIN_INPUT_MASK, usb_cur_val);
+	if (rc < 0)
+		dev_err(chip->dev, "cannot write to config c rc = %d\n", rc);
+	return rc;
+}
+
 /* if APSD results are used
  *	if SDP is detected it will look at 500mA setting
  *		if set it will draw 500mA
