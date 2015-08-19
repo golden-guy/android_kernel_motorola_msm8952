@@ -208,6 +208,25 @@ static void check_is_string(struct check *c, struct node *root,
 		FAIL(c, "\"%s\" property in %s is not a string",
 		     propname, node->fullpath);
 }
+
+static void check_is_null_terminated(struct check *c, struct node *root,
+			    struct node *node)
+{
+	struct property *prop;
+	char *propname = c->data;
+
+	prop = get_property(node, propname);
+	if (!prop)
+		return; /* Not present, assumed ok */
+
+	if (prop->val.val[prop->val.len-1] != '\0')
+		FAIL(c, "\"%s\" property in %s is not null terminated",
+		     propname, node->fullpath);
+}
+#define WARNING_IF_NOT_NULL_TERMINATED(nm, propname) \
+	WARNING(nm, NULL, check_is_null_terminated, NULL, (propname))
+#define ERROR_IF_NOT_NULL_TERMINATED(nm, propname) \
+	ERROR(nm, NULL, check_is_null_terminated, NULL, (propname))
 #define WARNING_IF_NOT_STRING(nm, propname) \
 	WARNING(nm, NULL, check_is_string, NULL, (propname))
 #define ERROR_IF_NOT_STRING(nm, propname) \
