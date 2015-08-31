@@ -221,6 +221,13 @@ static struct {
 } f12_c28_0;
 
 static struct {
+	unsigned char noise_floor;
+	unsigned char min_peak_amplitude;
+	unsigned char peak_merge_threshold_lsb;
+	unsigned char peak_merge_threshold_msb;
+} f12_c10_0;
+
+static struct {
 	unsigned char data[128];
 } dummy_subpkt;
 
