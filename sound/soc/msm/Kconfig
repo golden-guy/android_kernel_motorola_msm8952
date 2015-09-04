@@ -204,6 +204,7 @@ config SND_SOC_MSM8X16
 	select SND_SOC_CS35L34
 	select SND_SOC_CS35L35
 	select SND_SOC_OPALUM if SND_SOC_MARLEY
+	select SND_SOC_TFA9890
 	help
 	 To add support for SoC audio on MSM8996.
 	 This will enable sound soc drivers which
