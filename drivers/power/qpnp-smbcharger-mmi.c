@@ -1439,6 +1439,10 @@ static int get_prop_charge_full(struct smbchg_chip *chip)
 		SMB_DBG(chip, "Couldn't get charge full rc = %d\n", rc);
 		uah = DEFAULT_CHARGE_FULL;
 	}
+
+	if (uah == 0)
+		uah = DEFAULT_CHARGE_FULL;
+
 	return uah;
 }
 
@@ -1453,6 +1457,10 @@ static int get_prop_charge_full_design(struct smbchg_chip *chip)
 		SMB_DBG(chip, "Couldn't get full design rc = %d\n", rc);
 		uah = DEFAULT_CHARGE_FULL_DESIGN;
 	}
+
+	if (uah == 0)
+		uah = DEFAULT_CHARGE_FULL_DESIGN;
+
 	return uah;
 }
 
