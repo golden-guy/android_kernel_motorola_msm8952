@@ -15,6 +15,7 @@
 
 #include "msm8952-athene.dtsi"
 #include "dsi-panel-mot-tdi-546-1080p-cmd.dtsi"
+#include "msm8952-moto-fps.dtsi"
 
 / {
 	model = "Athene_16MP";
