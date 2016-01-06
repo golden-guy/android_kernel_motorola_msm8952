@@ -11,7 +11,7 @@
  */
 
 compatible = "qcom,mdss-dsi-panel";
-qcom,mdss-dsi-panel-name = "mipi_mot_cmd_smd_1080p_549";
+qcom,mdss-dsi-panel-name = "mipi_mot_cmd_smd_1080p_549_v0";
 qcom,mdss-dsi-panel-supplier = "smd";
 qcom,mdss-dsi-panel-type = "dsi_cmd_mode";
 qcom,mdss-dsi-panel-framerate = <60>;
@@ -19,10 +19,12 @@ qcom,mdss-dsi-virtual-channel-id = <0>;
 qcom,mdss-dsi-stream = <0>;
 qcom,mdss-dsi-panel-width = <1080>;
 qcom,mdss-dsi-panel-height = <1920>;
-qcom,mdss-pan-physical-width-dimension = <68>;
-qcom,mdss-pan-physical-height-dimension = <121>;
+/* To update dimension based on final spec */
+qcom,mdss-pan-physical-width-dimension = <65>;
+qcom,mdss-pan-physical-height-dimension = <115>;
 
-qcom,mdss-dsi-panel-clockrate = <814000000>;
+/* To update clock rate */
+qcom,mdss-dsi-panel-clockrate = <0>;
 qcom,mdss-dsi-h-front-porch = <44>;
 qcom,mdss-dsi-h-back-porch = <32>;
 qcom,mdss-dsi-h-pulse-width = <12>;
@@ -38,33 +40,21 @@ qcom,mdss-dsi-bpp = <24>;
 qcom,mdss-dsi-underflow-color = <0xff>;
 qcom,mdss-dsi-border-color = <0>;
 qcom,mdss-dsi-on-command = [
-	05 01 00 00 14 00 01 11
-	15 00 00 00 00 00 02 35 00
-	29 00 00 00 00 00 03 fc 5a 5a
-	29 00 00 00 00 00 03 f4 00 01
-	29 00 00 00 00 00 03 fc a5 a5
-	15 00 00 00 00 00 02 51 00
-	15 00 00 00 00 00 02 55 00
-	15 00 00 00 00 00 02 53 20
-	15 01 00 00 50 00 02 57 40
+	05 01 00 00 78 00 01 11
+	29 01 00 00 00 00 03 fc 5a 5a
+	29 01 00 00 00 00 03 f4 00 01
+	15 01 00 00 00 00 02 57 00
+	29 01 00 00 00 00 03 fc a5 a5
+	15 01 00 00 00 00 02 53 20
+	15 01 00 00 00 00 02 55 03
+	15 01 00 00 00 00 02 51 00
 	05 01 00 00 00 00 01 29];	/* display on */
 qcom,mdss-dsi-off-command = [
-	05 01 00 00 23 00 01 28		/* display_off */
-	05 01 00 00 96 00 01 10];	/* enter sleep mode */
+	05 01 00 00 0a 00 01 28		/* display_off */
+	05 01 00 00 55 00 01 10];	/* enter sleep mode */
 
 qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
 qcom,mdss-dsi-off-command-state = "dsi_lp_mode";
-qcom,mdss-dsi-force-tx-mode = "dsi_hs_mode";
-
-qcom,mdss-dsi-hbm-on-command = [15 01 00 00 00 00 02 53 e0];
-qcom,mdss-dsi-hbm-on-command-state = "dsi_hs_mode";
-qcom,mdss-dsi-hbm-off-command = [15 01 00 00 00 00 02 53 20];
-qcom,mdss-dsi-hbm-off-command-state = "dsi_hs_mode";
-qcom,mdss-dsi-acl-on-command = [15 01 00 00 00 00 02 55 03];
-qcom,mdss-dsi-acl-on-command-state = "dsi_hs_mode";
-qcom,mdss-dsi-acl-off-command = [15 01 00 00 00 00 02 55 00];
-qcom,mdss-dsi-acl-off-command-state = "dsi_hs_mode";
-
 qcom,mdss-dsi-h-sync-pulse = <0>;
 qcom,mdss-dsi-traffic-mode = "burst_mode";
 qcom,mdss-dsi-bllp-eof-power-mode;
@@ -73,16 +63,10 @@ qcom,mdss-dsi-lane-0-state;
 qcom,mdss-dsi-lane-1-state;
 qcom,mdss-dsi-lane-2-state;
 qcom,mdss-dsi-lane-3-state;
-qcom,mdss-dsi-panel-timings-phy-v2 =
-	[23 1e 07 08 05 03 04 a0
-	 23 1e 07 08 05 03 04 a0
-	 23 1e 07 08 05 03 04 a0
-	 23 1e 07 08 05 03 04 a0
-	 23 19 07 08 05 03 04 a0];
-
-qcom,mdss-dsi-panel-timings = [d5 32 22 00 60 62 26 34 29 03 04 00];
-qcom,mdss-dsi-t-clk-post = <0x0d>;
-qcom,mdss-dsi-t-clk-pre = <0x2d>;
+/* To caculate timing with final clock rate setting */
+qcom,mdss-dsi-panel-timings = [b0 23 1b 00 94 93 1e 25 15 03 04 00];
+qcom,mdss-dsi-t-clk-post = <0x1c>;
+qcom,mdss-dsi-t-clk-pre = <0x2c>;
 qcom,mdss-dsi-bl-min-level = <1>;
 qcom,mdss-dsi-bl-max-level = <255>;
 qcom,mdss-dsi-dma-trigger = "trigger_sw";
@@ -96,17 +80,6 @@ qcom,mdss-dsi-te-pin-select = <1>;
 qcom,mdss-dsi-te-dcs-command = <1>;
 qcom,mdss-dsi-te-check-enable;
 qcom,mdss-dsi-te-using-te-pin;
-
-qcom,partial-update-enabled;
-qcom,panel-roi-alignment = <8 0 8 0 1080 0>;
-
-/* Enable ESD checking */
-qcom,esd-check-enabled;
-qcom,mdss-dsi-panel-status-check-mode = "reg_read";
-qcom,mdss-dsi-panel-status-read-length = <1>;
-qcom,mdss-dsi-panel-status-command = [06 01 00 01 00 00 01 0A];
-qcom,mdss-dsi-panel-status-command-state = "dsi_hs_mode";
-qcom,mdss-dsi-panel-status-value = <0x9c>;
 
 qcom,panel-supply-entries {
 	#address-cells = <1>;
@@ -123,7 +96,8 @@ qcom,panel-supply-entries {
 		qcom,supply-post-on-sleep = <1>;
 		qcom,supply-pre-off-sleep = <0>;
 		qcom,supply-post-off-sleep = <1>;
-	};
+	}
+;
 	qcom,panel-supply-entry@1 {
 		reg = <1>;
 		qcom,supply-name = "vio_disp";
@@ -133,7 +107,7 @@ qcom,panel-supply-entries {
 		qcom,supply-disable-load = <100>;
 		qcom,supply-pre-on-sleep = <0>;
 		qcom,supply-post-on-sleep = <3>;
-		qcom,supply-pre-off-sleep = <11>; /* Give time for reset line */
+		qcom,supply-pre-off-sleep = <0>;
 		qcom,supply-post-off-sleep = <1>;
 	};
 
@@ -144,10 +118,10 @@ qcom,panel-supply-entries {
 		qcom,supply-max-voltage = <4600000>;
 		qcom,supply-enable-load = <100000>;
 		qcom,supply-disable-load = <100>;
-		qcom,supply-pre-on-sleep = <0>;
-		qcom,supply-post-on-sleep = <0>;
-		qcom,supply-pre-off-sleep = <0>;
-		qcom,supply-post-off-sleep = <0>;
+		qcom,supply-pre-on-sleep = <10>;
+		qcom,supply-post-on-sleep = <10>;
+		qcom,supply-pre-off-sleep = <10>;
+		qcom,supply-post-off-sleep = <10>;
 	};
 
 	qcom,panel-supply-entry@3 {
@@ -157,9 +131,9 @@ qcom,panel-supply-entries {
 		qcom,supply-max-voltage = <5000000>;
 		qcom,supply-enable-load = <100000>;
 		qcom,supply-disable-load = <100>;
-		qcom,supply-pre-on-sleep = <0>;
-		qcom,supply-post-on-sleep = <0>;
-		qcom,supply-pre-off-sleep = <0>;
-		qcom,supply-post-off-sleep = <0>;
+		qcom,supply-pre-on-sleep = <10>;
+		qcom,supply-post-on-sleep = <10>;
+		qcom,supply-pre-off-sleep = <10>;
+		qcom,supply-post-off-sleep = <10>;
 	};
 };
